@@ -1,0 +1,75 @@
+{
+  "_coords": "tapFrac is computed from each control's real RectTransform, NOT estimated. The canvas is Expand @1242x2688, so on the 1080x2400 capture device it resolves to 1242x2760 logical, and an AspectRatioFitter (FitInParent, 1242/2688) letterboxes the panel by 36 logical units top and bottom. Hence: fracX = (621 + x_from_panel_centre) / 1242 and fracY = (36 + y_from_panel_top) / 2760. Using 2688 as the denominator, or dropping the 36, shifts every tap 16-26 device px down - small enough that it still lands and large enough to eat the margin on a 92-unit control.",
+  "_timing": "Watch clock t=0 at WatchDirector.Start (the game scene's own loader is 0.4 s, which waitLoader absorbs). With no input at all the harbourmaster assist resolves a step every 5.0 s, dropping to 3.5 s once two flags are down, so the baseline is flag 1 at 15 s, flag 2 at 30 s, flag 3 at 40.5 s. The one board tap of step 6 resets the idle timer, which pushes the whole chain later: the EARLIEST the HARBOUR LOG can fire is ~45 s (9 steps: the tap plus assists at 14.2 / 19.2 / 24.2 / 29.2 / 34.2 / 37.7 / 41.2 / 44.7). Step 5 is captured at ~9 s (board up, one pip), step 6 at ~27 s (a flag planted, the board visibly changed), step 7 opens the pause card at ~30 s - a 15 s margin before the log can possibly exist, so PAUSE can never land on the log instead - and step 8 resumes and waits 38 s, landing at ~66 s with the log up and ~20 s of margin. Pausing freezes the drain and the activity timers, so the two seconds spent on the pause card do not count against any of this.",
+  "steps": [
+    {
+      "waitLoader": true,
+      "wait": 4,
+      "shot": "01_Harbour_Home"
+    },
+    {
+      "tapFrac": [
+        0.7271,
+        0.1362
+      ],
+      "label": "THE CREW tab",
+      "wait": 2,
+      "shot": "02_Crew_Shared_Quay"
+    },
+    {
+      "tapFrac": [
+        0.8462,
+        0.4297
+      ],
+      "label": "SALUTE on the first crew row",
+      "wait": 2,
+      "shot": "03_Salute_Sent"
+    },
+    {
+      "tapFrac": [
+        0.2729,
+        0.1362
+      ],
+      "label": "HARBOUR tab",
+      "wait": 2,
+      "shot": "04_Daily_Goal"
+    },
+    {
+      "tapFrac": [
+        0.5,
+        0.7123
+      ],
+      "label": "START WATCH",
+      "waitLoader": true,
+      "wait": 9,
+      "shot": "05_Quay_Board"
+    },
+    {
+      "tapFrac": [
+        0.5,
+        0.4333
+      ],
+      "label": "centre berth",
+      "wait": 18,
+      "shot": "06_Flag_Planted"
+    },
+    {
+      "tapFrac": [
+        0.9026,
+        0.0764
+      ],
+      "label": "PAUSE",
+      "wait": 2,
+      "shot": "07_Anchored"
+    },
+    {
+      "tapFrac": [
+        0.2987,
+        0.6703
+      ],
+      "label": "RESUME on the pause card",
+      "wait": 38,
+      "shot": "08_Harbour_Log"
+    }
+  ]
+}
